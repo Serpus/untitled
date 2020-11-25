@@ -10,8 +10,8 @@ public class MailTest extends BaseTest {
     @Test
     public void startTest() {
         final String strSubject = "Тестовое письмо",
-                login = "asdasd.qweqwe.90@inbox.ru",
-                password = "oihYOugRP2;1",
+                login = "cwd12.dwad21@list.ru",
+                password = "PUToAp3-ury1",
                 attachName = "Тестовый текстовый файл.txt",
                 attachName2 = "5.doc",
                 newSign = "--\nEdited Sign",

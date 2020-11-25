@@ -189,9 +189,9 @@ public class MailBoxPage extends Base {
     /**
      * Проверяем, что письмо с темой указканной в шаге 5 пристуствует в списке.
      */
+    final Map<Integer, String> subjectSendedLetterMap = new HashMap<Integer,String>();
     @Step("Проверяем, что письмо с темой указканной в шаге 5 пристуствует в списке..")
     public void checkSubjectOfSenedLetter(final String str) {
-        final Map<Integer, String> subjectSendedLetterMap = new HashMap<Integer,String>();
         waitVisiblityElement(allSubjectLetters);
         Integer i=0;
         for (WebElement x: allSubjectLetters) {
