@@ -35,6 +35,9 @@ public class MailBoxPage extends Base {
     @FindBy(xpath = ".//span[@title='Отправить']")
     private WebElement send;
 
+    @FindBy(xpath = ".//div[@class='layer__header']")
+    private WebElement captcha;
+
     @FindBy(xpath = ".//a[contains(@title, 'Входящие')]")
     private WebElement inbox;
 
@@ -77,6 +80,25 @@ public class MailBoxPage extends Base {
     @FindBy(xpath = "(.//div[@class=\"checkbox__box checkbox__box_checked\"]/ancestor::label[@class=\"checkbox__label\"])[3]")
     private WebElement checkboxSorting;
 
+    @FindBy(xpath = ".//form//h1")
+    private WebElement blockedEmail;
+
+    /**
+     * Проверяем, не заблокирован ли email.
+     */
+    @Step("Проверяем, не заблокирован ли email.")
+    public void checkEmail() {
+        sleep(3);
+        try {
+            if (blockedEmail.getText().equals("Восстановление доступа")) {
+                System.out.println("email заблокирован");
+                getDriver().quit();
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Почта не заблокирована");
+        }
+
+    }
 
     /**
      * Нажимаем на кнопку "Настройки".
@@ -92,7 +114,7 @@ public class MailBoxPage extends Base {
     @Step("Убираем чекбокс \"Группировка писем себе\".")
     public void setCheckboxSorting() {
         try {
-            click(checkboxSorting);
+            clickHiddenElement(checkboxSorting);
         } catch (NoSuchElementException e) {
             System.out.println("Чекбокс \"Группировка писем себе\" уже снят.");
         }
@@ -159,6 +181,22 @@ public class MailBoxPage extends Base {
     }
 
     /**
+     * Проверяем наличие капчи.
+     */
+    @Step("Проверяем наличие капчи.")
+    public void checkCaptcha() {
+        waitVisiblityElement(captcha);
+        try {
+            if (captcha.getText().equals("Введите код с картинки")) {
+                System.out.println("Появилась капча.");
+                getDriver().quit();
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Капча не появилась");
+        }
+    }
+
+    /**
      * Нажимаем на крестик после отправки письма.
      */
     @Step("Нажимаем на крестик после отправки письма.")
@@ -192,7 +230,14 @@ public class MailBoxPage extends Base {
     final Map<Integer, String> subjectSendedLetterMap = new HashMap<Integer,String>();
     @Step("Проверяем, что письмо с темой указканной в шаге 5 пристуствует в списке..")
     public void checkSubjectOfSenedLetter(final String str) {
+        sleep(2);
         waitVisiblityElement(allSubjectLetters);
+        for (WebElement x: allSubjectLetters) {
+            if (x.getText().equals("Ваше сообщение не доставлено. Mail failure.")) {
+                System.out.println("Сработал анти-спам");
+                getDriver().quit();
+            }
+        }
         Integer i=0;
         for (WebElement x: allSubjectLetters) {
             subjectSendedLetterMap.put(i, x.getText());
@@ -249,11 +294,7 @@ public class MailBoxPage extends Base {
     @Step("Скачиваем прикреплённый документ.")
     public void downloadAttach() {
         clickHiddenElement(downloadAttachButton);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(5);
     }
 
     /**
@@ -322,11 +363,7 @@ public class MailBoxPage extends Base {
      */
     @Step("Отмечаем чекбоксы напротив писем.")
     public void setCheckboxes() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(5);
         for (WebElement x: checkboxes) click(x);
     }
 

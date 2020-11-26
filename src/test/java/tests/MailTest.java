@@ -37,9 +37,10 @@ public class MailTest extends BaseTest {
         //Шаг 2
         System.out.println("Шаг 2");
         open.enterButton();
+        MailBoxPage letter = new MailBoxPage(getDriver());
+        letter.checkEmail();
        //Шаг 3
         System.out.println("Шаг 3");
-        MailBoxPage letter = new MailBoxPage(getDriver());
         letter.openKMSettingsSort();
         letter.setCheckboxSorting();
         letter.clickButtonWriteLetter();
@@ -53,6 +54,7 @@ public class MailTest extends BaseTest {
         letter.writeBody(bodyText);
         letter.setAttach("D:\\JenkinsWorkDir\\" + attachName);
         letter.clickSendButton();
+        letter.checkCaptcha();
         //Шаг 6
         System.out.println("Шаг 6");
         letter.clickOnCross();
@@ -89,6 +91,7 @@ public class MailTest extends BaseTest {
         letter.writeBody(bodyText2);
         letter.setAttach("D:\\JenkinsWorkDir\\" + attachName2);
         letter.clickSendButton();
+        letter.checkCaptcha();
         //Шаг 11
         System.out.println("Шаг 11");
         letter.clickOnCross();

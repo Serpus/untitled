@@ -65,4 +65,12 @@ public class Base {
     public void setTextHiddenElement(final WebElement element, final String str) {
         element.sendKeys(str);
     }
+
+    public void sleep(final int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
