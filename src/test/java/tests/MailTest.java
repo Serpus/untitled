@@ -13,6 +13,7 @@ public class MailTest extends BaseTest {
                 login = "cwd12.dwad21@list.ru",
                 password = "PUToAp3-ury1",
                 browserDownloadFolder = "C:\\Users\\serpu\\Downloads\\",
+                attachFolder = "D:\\JenkinsWorkDir\\",
                 attachName = "Тестовый текстовый файл.txt",
                 attachName2 = "5.doc",
                 newSign = "--\nEdited Sign",
@@ -53,7 +54,7 @@ public class MailTest extends BaseTest {
         letter.writeTo(login);
         letter.writeSubject(strSubject);
         letter.writeBody(bodyText);
-        letter.setAttach("D:\\JenkinsWorkDir\\" + attachName);
+        letter.setAttach(attachFolder + attachName);
         letter.clickSendButton();
         letter.checkCaptcha();
         //Шаг 6
@@ -90,7 +91,7 @@ public class MailTest extends BaseTest {
         letter.writeTo(login);
         letter.writeSubject(strSubject2);
         letter.writeBody(bodyText2);
-        letter.setAttach("D:\\JenkinsWorkDir\\" + attachName2);
+        letter.setAttach(attachFolder + attachName2);
         letter.clickSendButton();
         letter.checkCaptcha();
         //Шаг 11
