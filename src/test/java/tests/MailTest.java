@@ -12,6 +12,7 @@ public class MailTest extends BaseTest {
         final String strSubject = "Тестовое письмо",
                 login = "cwd12.dwad21@list.ru",
                 password = "PUToAp3-ury1",
+                browserDownloadFolder = "C:\\Users\\serpu\\Downloads\\",
                 attachName = "Тестовый текстовый файл.txt",
                 attachName2 = "5.doc",
                 newSign = "--\nEdited Sign",
@@ -68,7 +69,7 @@ public class MailTest extends BaseTest {
         letter.checkBodyInOpenLetter(bodyText);
         letter.checkAttach(attachName);
         letter.downloadAttach();
-        letter.checkDownloadedAttach();
+        letter.checkDownloadedAttach(browserDownloadFolder);
         //Шаг 8
         System.out.println("Шаг 8");
         letter.openKMSettings();

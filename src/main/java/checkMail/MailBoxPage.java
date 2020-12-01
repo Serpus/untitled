@@ -299,10 +299,11 @@ public class MailBoxPage extends Base {
 
     /**
      * Проверяем доступность скачанного документа.
+     * @param downloadFolder
      */
     @Step("Проверяем доступность скачанного документа.")
-    public void checkDownloadedAttach () {
-        getDriver().get("file:///" + "C:\\Users\\serpu\\Downloads\\" + attachName.getText());
+    public void checkDownloadedAttach (final String downloadFolder) {
+        getDriver().get("file:///" + downloadFolder + attachName.getText());
         try {
             Assert.assertNotEquals("ERR_FILE_NOT_FOUND", getDriver().findElement(By.className("error-code")).getText());
         } catch (NoSuchElementException e) {
