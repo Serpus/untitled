@@ -74,7 +74,7 @@ public class MailBoxPage extends Base {
     @FindBy(xpath = ".//span[@data-title-shortcut='Del']//span[@class='button2__txt']")
     private WebElement deleteLetterButton;
 
-    @FindBy(xpath = ".//div[@class='llc__avatar']/following::span[@class='llc__subject' or @class='llc__subject llc__subject_unread']")
+    @FindBy(xpath = ".//span[@class='ll-sj__normal']")
     private List<WebElement> allSubjectLetters;
 
     @FindBy(xpath = "(.//div[@class=\"checkbox__box checkbox__box_checked\"]/ancestor::label[@class=\"checkbox__label\"])[3]")
@@ -91,7 +91,7 @@ public class MailBoxPage extends Base {
         sleep(3);
         try {
             if (blockedEmail.getText().equals("Восстановление доступа")) {
-                System.out.println("email заблокирован");
+                System.out.println("Почта заблокирована");
                 getDriver().quit();
             }
         } catch (NoSuchElementException e) {
@@ -229,8 +229,8 @@ public class MailBoxPage extends Base {
      */
     final Map<Integer, String> subjectSendedLetterMap = new HashMap<Integer,String>();
     @Step("Проверяем, что письмо с темой указканной в шаге 5 пристуствует в списке..")
-    public void checkSubjectOfSenedLetter(final String str) {
-        sleep(2);
+    public void checkSubjectOfSendedLetter(final String str) {
+        sleep(4);
         waitVisiblityElement(allSubjectLetters);
         for (WebElement x: allSubjectLetters) {
             if (x.getText().equals("Ваше сообщение не доставлено. Mail failure.")) {
@@ -299,11 +299,10 @@ public class MailBoxPage extends Base {
 
     /**
      * Проверяем доступность скачанного документа.
-     * @param downloadFolder
      */
     @Step("Проверяем доступность скачанного документа.")
-    public void checkDownloadedAttach (final String downloadFolder) {
-        getDriver().get("file:///" + downloadFolder + attachName.getText());
+    public void checkDownloadedAttach () {
+        getDriver().get("file:///" + System.getProperty("user.dir") + "\\" + attachName.getText());
         try {
             Assert.assertNotEquals("ERR_FILE_NOT_FOUND", getDriver().findElement(By.className("error-code")).getText());
         } catch (NoSuchElementException e) {

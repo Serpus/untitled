@@ -10,10 +10,12 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.*;
 
 public class BaseTest {
     private String ggrUrl = "http://localhost:4445";
     private WebDriver driver;
+    private Map<String, Object> prefs = new HashMap<String, Object>();
     @Rule
     public TestWatcher watcher = new TestWatcher() {
         @Override
@@ -24,7 +26,10 @@ public class BaseTest {
         @Override
         protected void starting(Description description) {
             super.starting(description);
+            prefs.put("download.default_directory", System.getProperty("user.dir"));
             ChromeOptions option = new ChromeOptions();
+            option.setExperimentalOption("prefs", prefs);
+            System.out.println(option.getExperimentalOption("prefs"));
             DesiredCapabilities desire = DesiredCapabilities.chrome();
             desire.setCapability(ChromeOptions.CAPABILITY, option);
             URL url = null;

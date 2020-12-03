@@ -10,10 +10,9 @@ public class MailTest extends BaseTest {
     @Test
     public void startTest() {
         final String strSubject = "Тестовое письмо",
-                login = "cwd12.dwad21@list.ru",
-                password = "PUToAp3-ury1",
-                browserDownloadFolder = "C:\\Users\\serpu\\Downloads\\",
-                attachFolder = "D:\\JenkinsWorkDir\\",
+                login = "asdfa2.as3fafa@bk.ru",
+                password = "TSYUoarli11|",
+                attachFolder = "D:\\JenkinsWorkDir\\", // Указать, откуда загружать файл (локальная машина)
                 attachName = "Тестовый текстовый файл.txt",
                 attachName2 = "5.doc",
                 newSign = "--\nEdited Sign",
@@ -62,7 +61,7 @@ public class MailTest extends BaseTest {
         letter.clickOnCross();
         letter.clickOutbox();
         letter.clickInbox();
-        letter.checkSubjectOfSenedLetter(strSubject);
+        letter.checkSubjectOfSendedLetter(strSubject);
         //Шаг 7
         System.out.println("Шаг 7");
         letter.openLetter(strSubject);
@@ -70,7 +69,7 @@ public class MailTest extends BaseTest {
         letter.checkBodyInOpenLetter(bodyText);
         letter.checkAttach(attachName);
         letter.downloadAttach();
-        letter.checkDownloadedAttach(browserDownloadFolder);
+        letter.checkDownloadedAttach();
         //Шаг 8
         System.out.println("Шаг 8");
         letter.openKMSettings();
@@ -99,7 +98,7 @@ public class MailTest extends BaseTest {
         letter.clickOnCross();
         letter.clickOutbox();
         letter.clickInbox();
-        letter.checkSubjectOfSenedLetter(strSubject2);
+        letter.checkSubjectOfSendedLetter(strSubject2);
         //Шаг 12
         System.out.println("Шаг 12");
         letter.openLetter(strSubject2);
