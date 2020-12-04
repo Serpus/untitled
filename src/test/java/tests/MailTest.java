@@ -10,8 +10,12 @@ public class MailTest extends BaseTest {
     @Test
     public void startTest() {
         final String strSubject = "Тестовое письмо",
-                login = "asdfa2.as3fafa@bk.ru",
-                password = "TSYUoarli11|",
+                login = "cwd12.dwad21@list.ru",
+                password = "PUToAp3-ury1",
+                /*
+                login = "aad322gdsg@bk.ru",
+                password = "U1ARPa1utrd&",
+                */
                 attachFolder = "D:\\JenkinsWorkDir\\", // Указать, откуда загружать файл (локальная машина)
                 attachName = "Тестовый текстовый файл.txt",
                 attachName2 = "5.doc",

@@ -7,6 +7,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.File;
 import java.util.*;
 
 public class MailBoxPage extends Base {
@@ -83,6 +84,12 @@ public class MailBoxPage extends Base {
     @FindBy(xpath = ".//form//h1")
     private WebElement blockedEmail;
 
+    @FindBy(xpath = ".//h1")
+    private WebElement phoneNumberMO;
+
+    @FindBy(xpath = ".//div[@data-test-id='cross']")
+    private WebElement crossOnPhoneNumber;
+
     /**
      * Проверяем, не заблокирован ли email.
      */
@@ -96,6 +103,21 @@ public class MailBoxPage extends Base {
             }
         } catch (NoSuchElementException e) {
             System.out.println("Почта не заблокирована");
+        }
+
+    }
+
+    /**
+     * Закрываем МО добавления номера телефона при наличии
+     */
+    @Step("Закрываем МО добавления номера телефона при наличии")
+    public void closeMOPhoneNumber() {
+        try {
+            if (phoneNumberMO.getText().equals("Добавление номера телефона")) {
+                click(crossOnPhoneNumber);
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Окно добавления номера не появилось");
         }
 
     }
@@ -302,12 +324,14 @@ public class MailBoxPage extends Base {
      */
     @Step("Проверяем доступность скачанного документа.")
     public void checkDownloadedAttach () {
-        getDriver().get("file:///" + System.getProperty("user.dir") + "\\" + attachName.getText());
+        String attach = attachName.getText();
+        getDriver().get("file:///" + System.getProperty("user.dir") + "\\" + attach);
         try {
             Assert.assertNotEquals("ERR_FILE_NOT_FOUND", getDriver().findElement(By.className("error-code")).getText());
         } catch (NoSuchElementException e) {
             System.out.println("Проврека доступности скачанного документа: Файл скачан и доступен.");
         }
+        new File(System.getProperty("user.dir") + "\\" + attach).delete();
         getDriver().navigate().back();
         getDriver().navigate().back();
     }
