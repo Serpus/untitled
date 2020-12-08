@@ -90,6 +90,12 @@ public class MailBoxPage extends Base {
     @FindBy(xpath = ".//div[@data-test-id='cross']")
     private WebElement crossOnPhoneNumber;
 
+    @FindBy(xpath = ".//button[@data-test-id='onboarding-button-start']")
+    private WebElement startSettings;
+
+    @FindBy(xpath = ".//div[@data-test-id='cross']")
+    private WebElement startSettingsCross;
+
     /**
      * Проверяем, не заблокирован ли email.
      */
@@ -108,11 +114,26 @@ public class MailBoxPage extends Base {
     }
 
     /**
+     * Закрываем начальную настройку
+     */
+    @Step("Закрываем начальную настройку")
+    public void closeStartSetting() {
+        try {
+            click(startSettings);
+            click(startSettingsCross);
+        } catch (NoSuchElementException e) {
+            System.out.println("Начальные настройки не появились");
+        }
+
+    }
+
+    /**
      * Закрываем МО добавления номера телефона при наличии
      */
     @Step("Закрываем МО добавления номера телефона при наличии")
     public void closeMOPhoneNumber() {
         try {
+            waitVisiblityElement(phoneNumberMO);
             if (phoneNumberMO.getText().equals("Добавление номера телефона")) {
                 click(crossOnPhoneNumber);
             }

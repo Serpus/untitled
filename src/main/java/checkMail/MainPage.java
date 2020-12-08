@@ -15,11 +15,14 @@ public class MainPage extends Base {
     @FindBy(xpath = ".//input[@name='login']")
     private WebElement login;
 
-    @FindBy(xpath = ".//button[@id='mailbox:submit-button']")
-    private WebElement enterButton;
+    @FindBy(xpath = ".//div[@data-testid='mailbox-head']//following::button[@type = 'button']")
+    private WebElement enterLoginButton;
 
     @FindBy(xpath = ".//input[@name='password']")
     private WebElement password;
+
+    @FindBy(xpath = ".//div[@id = 'mailbox']//following::button[@type = 'button']")
+    private WebElement enterPassButton;
 
     /**
      * Ввводим логин в поле логина
@@ -40,10 +43,18 @@ public class MainPage extends Base {
     }
 
     /**
-     * Нажимаем кнопку "Войти"
+     * Нажимаем кнопку "Войти" после логина
      */
-    @Step
-    public void enterButton() {
-        click(enterButton);
+    @Step("Нажимаем кнопку \"Войти\" после логина")
+    public void enterLoginButton() {
+        click(enterLoginButton);
+    }
+
+    /**
+     * Нажимаем кнопку "Войти" после пароля
+     */
+    @Step("Нажимаем кнопку \"Войти\" после логина")
+    public void enterPassButton() {
+        click(enterPassButton);
     }
 }

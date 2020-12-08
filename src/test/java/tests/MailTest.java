@@ -13,9 +13,10 @@ public class MailTest extends BaseTest {
                 login = "cwd12.dwad21@list.ru",
                 password = "PUToAp3-ury1",
                 /*
-                login = "aad322gdsg@bk.ru",
-                password = "U1ARPa1utrd&",
+                login = "d21dasd.fg4t23fas@bk.ru",
+                password = "YNUJ1a~r2alt",
                 */
+
                 attachFolder = "D:\\JenkinsWorkDir\\", // Указать, откуда загружать файл (локальная машина)
                 attachName = "Тестовый текстовый файл.txt",
                 attachName2 = "5.doc",
@@ -37,13 +38,15 @@ public class MailTest extends BaseTest {
         System.out.println("Шаг 1");
         MainPage open = new MainPage(getDriver());
         open.setLogin(login);
-        open.enterButton();
+        open.enterLoginButton();
         open.setPassword(password);
         //Шаг 2
         System.out.println("Шаг 2");
-        open.enterButton();
+        open.enterPassButton();
         MailBoxPage letter = new MailBoxPage(getDriver());
         letter.checkEmail();
+        letter.closeStartSetting();
+        letter.closeMOPhoneNumber();
        //Шаг 3
         System.out.println("Шаг 3");
         letter.openKMSettingsSort();
