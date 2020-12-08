@@ -53,7 +53,7 @@ public class MainPage extends Base {
     /**
      * Нажимаем кнопку "Войти" после пароля
      */
-    @Step("Нажимаем кнопку \"Войти\" после логина")
+    @Step("Нажимаем кнопку \"Войти\" после пароля")
     public void enterPassButton() {
         click(enterPassButton);
     }
