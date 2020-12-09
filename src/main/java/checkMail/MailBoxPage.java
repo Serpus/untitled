@@ -84,10 +84,10 @@ public class MailBoxPage extends Base {
     @FindBy(xpath = ".//form//h1")
     private WebElement blockedEmail;
 
-    @FindBy(xpath = ".//h1")
+    @FindBy(xpath = ".//input[@data-test-id=\"phone-input\"]")
     private WebElement phoneNumberMO;
 
-    @FindBy(xpath = ".//div[@data-test-id='cross']")
+    @FindBy(xpath = ".//div[@data-test-id='cross']/*")
     private WebElement crossOnPhoneNumber;
 
     @FindBy(xpath = ".//button[@data-test-id='onboarding-button-start']")
@@ -134,9 +134,7 @@ public class MailBoxPage extends Base {
     public void closeMOPhoneNumber() {
         try {
             waitVisiblityElement(phoneNumberMO);
-            if (phoneNumberMO.getText().equals("Добавление номера телефона")) {
-                click(crossOnPhoneNumber);
-            }
+            click(crossOnPhoneNumber);
         } catch (NoSuchElementException e) {
             System.out.println("Окно добавления номера не появилось");
         }
