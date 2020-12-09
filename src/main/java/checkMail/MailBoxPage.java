@@ -84,7 +84,7 @@ public class MailBoxPage extends Base {
     @FindBy(xpath = ".//form//h1")
     private WebElement blockedEmail;
 
-    @FindBy(xpath = ".//input[@data-test-id=\"phone-input\"]")
+    @FindBy(xpath = ".//input[@data-test-id='phone-input']")
     private WebElement phoneNumberMO;
 
     @FindBy(xpath = ".//div[@data-test-id='cross']/*")
