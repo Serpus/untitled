@@ -21,7 +21,7 @@ public class MainPage extends Base {
     @FindBy(xpath = ".//input[@name='password']")
     private WebElement password;
 
-    @FindBy(xpath = ".//div[@id = 'mailbox']//following::button[@type = 'button']")
+    @FindBy(xpath = ".//button[contains(@class, 'second-button')]")
     private WebElement enterPassButton;
 
     /**
