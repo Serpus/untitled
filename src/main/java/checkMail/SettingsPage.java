@@ -51,7 +51,7 @@ public class SettingsPage extends Base {
      */
     @Step("Редактируем подпись.")
     public void editSignText(final String str) {
-        removeText(signText, str);
+        replaceText(signText, str);
     }
 
     /**

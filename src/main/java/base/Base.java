@@ -55,7 +55,7 @@ public class Base {
         element.sendKeys(str);
     }
 
-    public void removeText(final WebElement element, final String str) {
+    public void replaceText(final WebElement element, final String str) {
         waitVisiblityElement(element);
         element.clear();
         click(element);

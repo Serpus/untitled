@@ -305,7 +305,7 @@ public class MailBoxPage extends Base {
      * Проверяем, что тема письма соответстует теме из шага 5.
      * @param str
      */
-    @Step("Проверяем, что тема пибма соответстует теме из шага 5.")
+    @Step("Проверяем, что тема письма соответстует теме из шага 5.")
     public void checkSubjectInOpenLetter(final String str) {
         waitVisiblityElement(subjectInOpenLetter);
         Assert.assertEquals(str, subjectInOpenLetter.getText());
